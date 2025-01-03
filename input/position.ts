@@ -14,7 +14,7 @@ export class Position{
         return this.y * 20
     }
     detectOutOfBound():boolean{
-        return this.y < 0 || this.y > 19 || this.x < 0 || this.x > 19
+        return this.y < 0 || this.y > 24 || this.x < 0 || this.x > 24
     }
     
 }

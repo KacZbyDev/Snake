@@ -22,7 +22,7 @@ class Game{
     public start():void{
         this.drawSnakePosition(this.snake.segments,"green")
         this.putFruit()
-        document.addEventListener("keydown",(event)=>{
+        document.addEventListener("keydown",(event:KeyboardEvent)=>{
             const ascii:number = event.key.charCodeAt(0)
             this.snake.setNewDirection(ascii)
             
@@ -30,8 +30,8 @@ class Game{
         this.gameLoop = setInterval(()=>{
             const oldSnakePosition:Position[] = this.snake.segments
             const newHead = this.snake.getNewHead()
-            if(this.snake.detectCollision(newHead)) this.setGameResult(true)
-            else if(this.snake.segments.length === 400) this.setGameResult(false)
+            if(this.snake.detectCollision(newHead)) this.setGameResult(false)
+            else if(this.snake.segments.length === 400) this.setGameResult(true)
             else{
                 const hasEaten:boolean = this.fruit.comparePositions(newHead)
                 this.snake.setNewPosition(hasEaten,newHead)
@@ -64,9 +64,15 @@ class Game{
         }
     }
     private setGameResult(hasWin:boolean):void{
-        const gameResultElement:Element = document.getElementById("game-result")!
-        const message = hasWin ? "Game Over" : "you won"
-        gameResultElement.innerHTML = message
+        const message:string = hasWin ? "you won!" : "Game Over"
+        const color:string = hasWin ? "green" : "red"
+
+        this.ctx.font = "60px Arial"
+        this.ctx.fillStyle = color
+        this.ctx.textAlign = "center"
+        this.ctx.textBaseline = "middle"
+
+        this.ctx.fillText(message,this.canvas.width/2,this.canvas.height/2)
         clearInterval(this.gameLoop)
     }
     

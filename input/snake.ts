@@ -12,7 +12,7 @@ export class Snake{
     private directionChangeFlag:boolean
 
     constructor(){
-        this.segments = [new Position(12,12)]
+        this.segments = [new Position(10,12),new Position(11,12),new Position(12,12)]
         this.direction = Direction.RIGHT
         this.directionChangeFlag = false
     }
@@ -80,8 +80,6 @@ export class Snake{
         if(head.detectOutOfBound()) return true
         for(const element of this.segments){
             if(this.comparePosition(element,head)) return true
-            
-            
         }
         return false
     }
