@@ -2,7 +2,7 @@ import {Snake} from "./snake.js"
 import {Fruit} from "./fruit.js"
 import { Score } from "./Score.js"
 import { Position } from "./position.js"
-class Game{
+export class Game{
     private readonly canvas:HTMLCanvasElement
     private readonly ctx:CanvasRenderingContext2D
     private readonly squareWidth: number
