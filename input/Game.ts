@@ -9,8 +9,9 @@ export class Game{
     private readonly snake:Snake
     private readonly fruit: Fruit
     private readonly score:Score
+    private readonly callBackFunction:callBack
     private gameLoop:number | undefined
-    constructor(){
+    constructor(callBackFunction:callBack){
         this.canvas = document.querySelector("#game-pallete")!;
         this.ctx = this.canvas.getContext("2d")!;
         this.squareWidth = 20
@@ -18,6 +19,7 @@ export class Game{
         this.fruit = new Fruit(this.snake)
         this.score = new Score()
         this.gameLoop = undefined
+        this.callBackFunction = callBackFunction
     }
     public start():void{
         this.drawSnakePosition(this.snake.segments,"green")
@@ -74,11 +76,10 @@ export class Game{
 
         this.ctx.fillText(message,this.canvas.width/2,this.canvas.height/2)
         clearInterval(this.gameLoop)
+        this.callBackFunction()
     }
     
     
 
 }
-const game:Game = new Game()
-game.start()
 
